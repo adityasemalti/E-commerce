@@ -19,9 +19,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (!email || !password) {
-      return toast.error('Please fill in all fields');
-    }
+    if (!email || !password) return toast.error('Please fill in all fields');
 
     try {
       setLoading(true);
@@ -44,9 +42,7 @@ const Login = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (!name || !regEmail || !regPassword) {
-      return toast.error('Please fill in all fields');
-    }
+    if (!name || !regEmail || !regPassword) return toast.error('Please fill in all fields');
 
     try {
       setLoading(true);
@@ -74,105 +70,105 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (token) {
-      navigate('/');
-    }
+    if (token) navigate('/');
   }, [token]);
 
   return (
-    <div className='h-screen w-screen flex items-center justify-center'>
-      <div className='h-[90%] w-[30%] shadow-lg shadow-black rounded-lg p-5'>
+    <div className='min-h-screen w-full flex items-center justify-center px-4 bg-gray-100'>
+      <div className='w-full max-w-md shadow-lg rounded-lg p-6 bg-white'>
         {status === 'login' ? (
           <>
             <h1 className='text-center text-2xl font-bold mb-6'>Login</h1>
-            <div className='flex flex-col'>
-              <label className='font-semibold ml-5 text-lg mt-10 mb-3'>E-mail</label>
-              <div className="relative w-[90%] ml-5 mb-4">
+            <form className='flex flex-col' onSubmit={handleLogin}>
+              <label className='font-semibold text-lg mb-2'>E-mail</label>
+              <div className="relative mb-4">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className='pr-10 outline-none w-full border-2 border-black h-12 rounded-full px-4'
+                  className='w-full pr-10 border-2 border-black h-12 rounded-full px-4 outline-none'
                 />
                 <MdEmail className="absolute top-3 right-4 text-gray-500 text-xl" />
               </div>
 
-              <label className='font-semibold ml-5 text-lg mb-3'>Password</label>
-              <div className="relative w-[90%] ml-5 mb-6">
+              <label className='font-semibold text-lg mb-2'>Password</label>
+              <div className="relative mb-6">
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className='pr-10 outline-none w-full border-2 border-black h-12 rounded-full px-4'
+                  className='w-full pr-10 border-2 border-black h-12 rounded-full px-4 outline-none'
                 />
                 <IoIosLock className="absolute top-3 right-4 text-gray-500 text-xl" />
               </div>
 
               <button
-                onClick={handleLogin}
+                type="submit"
                 disabled={loading}
-                className='active:scale-95 duration-150 self-center mb-4 mt-8'
+                className='bg-black text-white py-2 rounded-full font-semibold hover:bg-gray-800 transition'
               >
-                <span className='border-2 border-black px-6 py-2 rounded-3xl text-lg'>
-                  {loading ? 'Logging in...' : 'Login'}
-                </span>
+                {loading ? 'Logging in...' : 'Login'}
               </button>
+            </form>
 
-              <p className='text-center font-semibold mt-5'>Don't have an account?</p>
-              <button onClick={() => setStatus('register')} className='mt-5 active:scale-95 duration-150 self-center'>
-                <span className='border-2 border-black px-6 py-2 rounded-3xl text-lg'>Sign up</span>
-              </button>
-            </div>
+            <p className='text-center font-semibold mt-6'>Don't have an account?</p>
+            <button
+              onClick={() => setStatus('register')}
+              className='mt-3 border-2 border-black py-2 px-4 rounded-full font-semibold hover:bg-black hover:text-white transition self-center'
+            >
+              Sign up
+            </button>
           </>
         ) : (
           <>
             <h1 className='text-center text-2xl font-bold mb-6'>Register</h1>
-            <div className='flex flex-col'>
-              <label className='font-semibold ml-5 text-lg mt-10 mb-3'>Name</label>
+            <form className='flex flex-col' onSubmit={handleRegister}>
+              <label className='font-semibold text-lg mb-2'>Name</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className='outline-none w-[90%] border-2 border-black h-12 rounded-full px-4 mb-4 ml-5'
+                className='w-full border-2 border-black h-12 rounded-full px-4 mb-4 outline-none'
               />
 
-              <label className='font-semibold ml-5 text-lg mb-3'>E-mail</label>
-              <div className="relative w-[90%] ml-5 mb-4">
+              <label className='font-semibold text-lg mb-2'>E-mail</label>
+              <div className="relative mb-4">
                 <input
                   type="email"
                   value={regEmail}
                   onChange={(e) => setRegEmail(e.target.value)}
-                  className='pr-10 outline-none w-full border-2 border-black h-12 rounded-full px-4'
+                  className='w-full pr-10 border-2 border-black h-12 rounded-full px-4 outline-none'
                 />
                 <MdEmail className="absolute top-3 right-4 text-gray-500 text-xl" />
               </div>
 
-              <label className='font-semibold ml-5 text-lg mb-3'>Password</label>
-              <div className="relative w-[90%] ml-5 mb-6">
+              <label className='font-semibold text-lg mb-2'>Password</label>
+              <div className="relative mb-6">
                 <input
                   type="password"
                   value={regPassword}
                   onChange={(e) => setRegPassword(e.target.value)}
-                  className='pr-10 outline-none w-full border-2 border-black h-12 rounded-full px-4'
+                  className='w-full pr-10 border-2 border-black h-12 rounded-full px-4 outline-none'
                 />
                 <IoIosLock className="absolute top-3 right-4 text-gray-500 text-xl" />
               </div>
 
               <button
-                onClick={handleRegister}
+                type="submit"
                 disabled={loading}
-                className='active:scale-95 duration-150 self-center mb-4 mt-5'
+                className='bg-black text-white py-2 rounded-full font-semibold hover:bg-gray-800 transition'
               >
-                <span className='border-2 border-black px-6 py-2 rounded-3xl text-lg'>
-                  {loading ? 'Registering...' : 'Register'}
-                </span>
+                {loading ? 'Registering...' : 'Register'}
               </button>
+            </form>
 
-              <p className='text-center font-semibold my-3'>Already have an account?</p>
-              <button onClick={() => setStatus('login')} className='mt-2 active:scale-95 duration-150 self-center'>
-                <span className='border-2 border-black px-6 py-2 rounded-3xl text-lg'>Login</span>
-              </button>
-            </div>
+            <p className='text-center font-semibold mt-6'>Already have an account?</p>
+            <button
+              onClick={() => setStatus('login')}
+              className='mt-3 border-2 border-black py-2 px-4 rounded-full font-semibold hover:bg-black hover:text-white transition self-center'
+            >
+              Login
+            </button>
           </>
         )}
       </div>
