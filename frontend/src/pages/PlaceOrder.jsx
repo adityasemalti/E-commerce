@@ -91,147 +91,131 @@ const PlaceOrder = () => {
   };
 
   return (
-    <form
-      className="flex flex-col lg:flex-row justify-between px-6 py-10 gap-8"
-      onSubmit={handlePlaceOrder}
-    >
-      {/* ------ Left Side: Delivery Information ------ */}
-      <div className="flex flex-col w-full lg:w-1/2 gap-6">
-        <h1 className="text-3xl font-semibold mb-2">Delivery Information</h1>
+    // Inside your <form> return block
+<form
+  className="flex flex-col lg:flex-row justify-between px-4 sm:px-6 py-10 gap-10"
+  onSubmit={handlePlaceOrder}
+>
+  {/* ------ Left Side: Delivery Information ------ */}
+  <div className="flex flex-col w-full lg:w-1/2 gap-6">
+    <h1 className="text-2xl sm:text-3xl font-semibold mb-2">Delivery Information</h1>
 
-        <div className="flex flex-col md:flex-row gap-4">
+    <div className="flex flex-col md:flex-row gap-4">
+      <input
+        name="firstName"
+        type="text"
+        placeholder="First Name"
+        value={formData.firstName}
+        onChange={onChangeHandler}
+        className="input-field"
+      />
+      <input
+        name="lastName"
+        type="text"
+        placeholder="Last Name"
+        value={formData.lastName}
+        onChange={onChangeHandler}
+        className="input-field"
+      />
+    </div>
+
+    <input
+      name="email"
+      type="email"
+      placeholder="E-mail Address"
+      value={formData.email}
+      onChange={onChangeHandler}
+      className="input-field"
+    />
+
+    <input
+      name="street"
+      type="text"
+      placeholder="Street"
+      value={formData.street}
+      onChange={onChangeHandler}
+      className="input-field"
+    />
+
+    <div className="flex flex-col md:flex-row gap-4">
+      <input
+        name="city"
+        type="text"
+        placeholder="City"
+        value={formData.city}
+        onChange={onChangeHandler}
+        className="input-field"
+      />
+      <input
+        name="state"
+        type="text"
+        placeholder="State"
+        value={formData.state}
+        onChange={onChangeHandler}
+        className="input-field"
+      />
+    </div>
+
+    <div className="flex flex-col md:flex-row gap-4">
+      <input
+        name="country"
+        type="text"
+        placeholder="Country"
+        value={formData.country}
+        onChange={onChangeHandler}
+        className="input-field"
+      />
+      <input
+        name="zipCode"
+        type="text"
+        placeholder="Zip Code"
+        value={formData.zipCode}
+        onChange={onChangeHandler}
+        className="input-field"
+      />
+    </div>
+
+    <input
+      name="phone"
+      type="text"
+      placeholder="Phone Number"
+      value={formData.phone}
+      onChange={onChangeHandler}
+      className="input-field"
+    />
+  </div>
+
+  {/* ------ Right Side: Payment and Summary ------ */}
+  <div className="w-full lg:w-1/2 flex flex-col gap-6">
+    <h1 className="text-2xl sm:text-3xl font-semibold text-center">Payment Method</h1>
+
+    <div className="flex flex-col gap-4 border border-gray-300 rounded p-4">
+      {['cod', 'card', 'upi'].map((option) => (
+        <label key={option} className="flex items-center gap-3">
           <input
-            name="firstName"
-            type="text"
-            placeholder="First Name"
-            value={formData.firstName}
-            onChange={onChangeHandler}
-            className="border border-gray-400 rounded py-2 px-4 w-full"
+            type="radio"
+            name="payment"
+            value={option}
+            checked={method === option}
+            onChange={() => setMethod(option)}
           />
-          <input
-            name="lastName"
-            type="text"
-            placeholder="Last Name"
-            value={formData.lastName}
-            onChange={onChangeHandler}
-            className="border border-gray-400 rounded py-2 px-4 w-full"
-          />
-        </div>
+          <span className="capitalize">{option === 'cod' ? 'Cash on Delivery' : option}</span>
+        </label>
+      ))}
+    </div>
 
-        <input
-          name="email"
-          type="email"
-          placeholder="E-mail Address"
-          value={formData.email}
-          onChange={onChangeHandler}
-          className="border border-gray-400 rounded py-2 px-4 w-full"
-        />
-        <input
-          name="street"
-          type="text"
-          placeholder="Street"
-          value={formData.street}
-          onChange={onChangeHandler}
-          className="border border-gray-400 rounded py-2 px-4 w-full"
-        />
+    <div className="flex flex-col items-center w-full">
+      <CartTotal />
+      <button
+        type="submit"
+        className="bg-black text-white py-2 px-4 rounded-md w-full sm:w-1/2 lg:w-1/3 mt-5 transition hover:bg-gray-800"
+      >
+        Place Order
+      </button>
+    </div>
+  </div>
+</form>
 
-        <div className="flex flex-col md:flex-row gap-4">
-          <input
-            name="city"
-            type="text"
-            placeholder="City"
-            value={formData.city}
-            onChange={onChangeHandler}
-            className="border border-gray-400 rounded py-2 px-4 w-full"
-          />
-          <input
-            name="state"
-            type="text"
-            placeholder="State"
-            value={formData.state}
-            onChange={onChangeHandler}
-            className="border border-gray-400 rounded py-2 px-4 w-full"
-          />
-        </div>
-
-        <div className="flex flex-col md:flex-row gap-4">
-          <input
-            name="country"
-            type="text"
-            placeholder="Country"
-            value={formData.country}
-            onChange={onChangeHandler}
-            className="border border-gray-400 rounded py-2 px-4 w-full"
-          />
-          <input
-            name="zipCode"
-            type="text"
-            placeholder="Zip Code"
-            value={formData.zipCode}
-            onChange={onChangeHandler}
-            className="border border-gray-400 rounded py-2 px-4 w-full"
-          />
-        </div>
-
-        <input
-          name="phone"
-          type="text"
-          placeholder="Phone Number"
-          value={formData.phone}
-          onChange={onChangeHandler}
-          className="border border-gray-400 rounded py-2 px-4 w-full"
-        />
-      </div>
-
-      {/* ------ Right Side: Payment and Summary ------ */}
-      <div className="w-full lg:w-1/2 flex flex-col gap-6">
-        <h1 className="text-3xl font-semibold text-center">Payment Method</h1>
-
-        <div className="flex flex-col gap-4 border border-gray-300 rounded p-6">
-          <label className="flex items-center gap-3">
-            <input
-              type="radio"
-              name="payment"
-              value="cod"
-              checked={method === 'cod'}
-              onChange={() => setMethod('cod')}
-            />
-            <span>Cash on Delivery</span>
-          </label>
-          <label className="flex items-center gap-3">
-            <input
-              type="radio"
-              name="payment"
-              value="card"
-              checked={method === 'card'}
-              onChange={() => setMethod('card')}
-            />
-            <span>Credit / Debit Card</span>
-          </label>
-          <label className="flex items-center gap-3">
-            <input
-              type="radio"
-              name="payment"
-              value="upi"
-              checked={method === 'upi'}
-              onChange={() => setMethod('upi')}
-            />
-            <span>UPI / Wallet</span>
-          </label>
-        </div>
-
-        {/* Order Summary */}
-        <div className="flex flex-col items-center">
-          <CartTotal />
-          <button
-            type="submit"
-            className="bg-black text-white py-2 px-3 rounded-md w-1/4 mt-5"
-          >
-            Place Order
-          </button>
-        </div>
-      </div>
-    </form>
   );
 };
 

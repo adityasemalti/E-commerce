@@ -52,10 +52,10 @@ const Orders = () => {
           orderData.map((item, index) => (
             <div
               key={index}
-              className="bg-white shadow-md rounded-xl p-6 flex flex-col md:flex-row gap-6 items-start md:items-center border border-gray-200"
+              className="bg-white shadow-md rounded-xl p-4 md:p-6 flex flex-col md:flex-row gap-4 md:gap-6 border border-gray-200"
             >
-              {/* Left: Product Image */}
-              <div className="w-full md:w-1/4">
+              {/* Product Image */}
+              <div className="w-full md:w-1/4 flex-shrink-0">
                 <img
                   src={item.image[0]}
                   alt={item.name || 'Product'}
@@ -63,16 +63,15 @@ const Orders = () => {
                 />
               </div>
 
-              {/* Middle: Product Info + Ready to Ship */}
-              <div className="flex-1 w-full">
-                <h2 className="text-xl font-semibold text-gray-800">{item.name}</h2>
+              {/* Product Info */}
+              <div className="flex-1">
+                <h2 className="text-lg md:text-xl font-semibold text-gray-800">{item.name}</h2>
                 <p className="text-gray-600 mt-1">
                   <span className="font-medium">Price:</span> {currency}{item.price}
                 </p>
                 <p className="text-gray-600">
                   <span className="font-medium">Quantity:</span> {item.quantity || 1}
                 </p>
-                
                 <p className="text-gray-600">
                   <span className="font-medium">Payment:</span> {item.payment} via {item.paymentMethod}
                 </p>
@@ -82,12 +81,11 @@ const Orders = () => {
                 <p className="text-gray-600">
                   <span className="font-medium">Status:</span> {item.status}
                 </p>
-                
               </div>
 
-              {/* Right: Track Button */}
-              <div className="w-full md:w-[150px] flex justify-start md:justify-end">
-                <button className="px-4 py-2 border rounded-full hover:scale-105 text-sm font-medium transition">
+              {/* Track Button */}
+              <div className="w-full md:w-[150px] flex justify-start md:justify-end mt-4 md:mt-0">
+                <button className="px-4 py-2 border rounded-full hover:bg-blue-600 hover:text-white transition-all text-sm font-medium">
                   Track Order
                 </button>
               </div>
